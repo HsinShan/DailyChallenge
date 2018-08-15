@@ -17,53 +17,56 @@
                     ev=window.event||ev;
                     var self=ev.target||ev.srcElement;
 
-                    if(self.className==""){
-                        if(oresult.innerHTML.length<17){
-                            if(oresult.innerHTML!=0){
-                                oresult.innerHTML+=self.innerHTML;
-                            }else if(oresult.innerHTML==0){
-                                oresult.innerHTML=self.innerHTML;
-                            }
-                        }else{
-                            alert("此計算機最多只能容納17位數!!");
-                        }
-                    }else if(self.className=="clean"){
-                        if(self.innerHTML=="C"){
-                            oresult.innerHTML=0;
-                            num=num2=count=null;
-                            result=0;
-                        }else{
-                            if(oresult.innerHTML.length-1>0){
-                                oresult.innerHTML=oresult.innerHTML.substring(0,oresult.innerHTML.length-1)
+                    if(self.innerHTML.length<10){
+                        //防止按到table
+                        if(self.className==""){
+                            if(oresult.innerHTML.length<17){
+                                if(oresult.innerHTML!=0){
+                                    oresult.innerHTML+=self.innerHTML;
+                                }else if(oresult.innerHTML==0){
+                                    oresult.innerHTML=self.innerHTML;
+                                }
                             }else{
+                                alert("此計算機最多只能容納17位數!!");
+                            }
+                        }else if(self.className=="clean"){
+                            if(self.innerHTML=="C"){
                                 oresult.innerHTML=0;
+                                num=num2=count=null;
+                                result=0;
+                            }else{
+                                if(oresult.innerHTML.length-1>0){
+                                    oresult.innerHTML=oresult.innerHTML.substring(0,oresult.innerHTML.length-1)
+                                }else{
+                                    oresult.innerHTML=0;
+                                }
+
+                            }
+                        }else if(self.className=="count"){
+                            if(self.innerHTML=="+/-"){
+                                oresult.innerHTML=-parseFloat(oresult.innerHTML);
+                            }else if(self.innerHTML=="%"){
+                                oresult.innerHTML=parseFloat(oresult.innerHTML)/100;
+                            }else{
+                                count=self.innerHTML;
+                                num=oresult.innerHTML;
+                                oresult.innerHTML+=self.innerHTML;
+                            }
+                        }else{//按下=
+                            if(count!=null){
+                                num2=oresult.innerHTML.substring(num.length+count.length,oresult.innerHTML.length);
+
+                                if(num2==""){
+                                    num2=0;
+                                }
+                                result=countnumber(count,parseFloat(num),parseFloat(num2));
+                                oresult.innerHTML=parseFloat(result);
+                                num=num2=count=null;
+                            }else{
+                                oresult.innerHTML=parseFloat(oresult.innerHTML);
                             }
 
                         }
-                    }else if(self.className=="count"){
-                        if(self.innerHTML=="+/-"){
-                            oresult.innerHTML=-parseFloat(oresult.innerHTML);
-                        }else if(self.innerHTML=="%"){
-                            oresult.innerHTML=parseFloat(oresult.innerHTML)/100;
-                        }else{
-                            count=self.innerHTML;
-                            num=oresult.innerHTML;
-                            oresult.innerHTML+=self.innerHTML;
-                        }
-                    }else{//按下=
-                        if(count!=null){
-                            num2=oresult.innerHTML.substring(num.length+count.length,oresult.innerHTML.length);
-
-                            if(num2==""){
-                                num2=0;
-                            }
-                            result=countnumber(count,parseFloat(num),parseFloat(num2));
-                            oresult.innerHTML=parseFloat(result);
-                            num=num2=count=null;
-                        }else{
-                            oresult.innerHTML=parseFloat(oresult.innerHTML);
-                        }
-
                     }
 
                 }
