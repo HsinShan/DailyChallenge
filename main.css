@@ -6,7 +6,8 @@ header{
     text-align: center;
 
 }
-header h1{
+h1{
+    font-size: 30px;
     padding: 0;
     padding-top:20px;
     margin: 0;
