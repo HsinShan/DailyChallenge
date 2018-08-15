@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CoinCollector</title>
+        <link rel="stylesheet" href="style.css">
+        <script>
+            window.onload=function(){
+                var odeg=document.getElementsByClassName("gathering")[0];
+                var ochoose=odeg.getElementsByTagName("li");
+                var d=0;
+                var coin=document.getElementsByClassName("coin")[0];
+                var ostart=document.getElementById("start");
+                var ogame=document.getElementById("game");
+                var timer=null;
+                var speed=0;
+                var num=0;
+                var startgame=false;
+                var oscore=odeg.getElementsByTagName("i")[0];
+                var score=0;
+                var result=ogame.getElementsByTagName("p")[0];
+
+                for(var i=0;i<ochoose.length;i++){
+                    ochoose[i].index=i;
+                    ochoose[i].onclick=function(){
+                        ochoose[d].className="";
+                        d=this.index;
+                        ochoose[d].className="active";
+
+                    } 
+                }
+
+                ostart.onclick=function(){
+                    result.innerHTML="";
+                    startgame=true;
+                    clearInterval(timer);
+                    timer=null;
+                    num=0
+                    speed=0
+                    score=0;
+                    console.log(num,speed,score);
+                    oscore.innerHTML=score;
+                    coin.style.display="block";
+                    coin.style.top=speed+"px";
+                    setTime();
+                }
+
+                coin.onclick=function(){
+                    if(startgame==true){
+                        clearInterval(timer);
+                        timer=null;
+                        num+=1;
+                        speed=0;
+                        setTimeout(function(){
+                            coin.className="coin";
+                            coin.innerHTML="";
+                            coin.style.top=speed+"px";
+                            coin.style.left=Math.random()*620+"px";
+                            setTime();
+                        },100);
+                        coin.className+=" coin2";
+                        coin.innerHTML="+1"; 
+                        score+=1;
+                        oscore.innerHTML=score;
+                    }
+                }
+                function setTime(){
+                    if(timer==null){
+                        timer=setInterval(update,Math.abs(d-3)*30);
+
+                    }
+
+                }
+                function update(){
+                    if(num!=10){
+                        speed+=10;
+                        if(speed==350){
+                            speed=0;
+                            coin.style.top=speed+"px";
+                            coin.style.left=Math.random()*620+"px";
+                            num+=1;
+                        }else{
+                            coin.style.top=speed+"px";
+
+                        }
+                    }else{
+                        clearInterval(timer);
+                        timer=null;
+                        startgame=false;
+                        coin.style.display="none";
+                        result.innerHTML="Your Score:"+oscore.innerHTML+"<br>Try Again!";
+                    }
+                }
+
+
+
+
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>CoinCollector</h1>
+        </header>
+        <div class="gathering">
+            <div class="degree">
+                <ul>
+                    <li class="active">Easy</li>
+                    <li>Medium</li>
+                    <li>Difficult</li>
+                </ul>
+                <br><p>Score:<i>0</i></p>
+                <br><a id="start" href="#">start</a>
+            </div>
+            <div id="game">
+                <div class="coin"></div>
+                <p></p>
+            </div>
+        </div>
+    </body>
+</html>
