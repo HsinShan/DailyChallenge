@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="calulatorstyle.css">
+        <title>calculator</title>
+        <script>
+            window.onload=function(){
+                var obtn=document.getElementById("btn");
+                var oresult=document.getElementById("result");
+                var num=null;//存被運算數
+                var num2=null;//存運算數
+                var count=null;//存運算符號
+                var result=0;//存當前結果
+
+                obtn.onclick=function(ev){
+                    ev=window.event||ev;
+                    var self=ev.target||ev.srcElement;
+
+                    if(self.className==""){
+                        if(oresult.innerHTML.length<17){
+                            if(oresult.innerHTML!=0){
+                                oresult.innerHTML+=self.innerHTML;
+                            }else if(oresult.innerHTML==0){
+                                oresult.innerHTML=self.innerHTML;
+                            }
+                        }else{
+                            alert("此計算機最多只能容納17位數!!");
+                        }
+                    }else if(self.className=="clean"){
+                        if(self.innerHTML=="C"){
+                            oresult.innerHTML=0;
+                            num=num2=count=null;
+                            result=0;
+                        }else{
+                            if(oresult.innerHTML.length-1>0){
+                                oresult.innerHTML=oresult.innerHTML.substring(0,oresult.innerHTML.length-1)
+                            }else{
+                                oresult.innerHTML=0;
+                            }
+
+                        }
+                    }else if(self.className=="count"){
+                        if(self.innerHTML=="+/-"){
+                            oresult.innerHTML=-parseFloat(oresult.innerHTML);
+                        }else if(self.innerHTML=="%"){
+                            oresult.innerHTML=parseFloat(oresult.innerHTML)/100;
+                        }else{
+                            count=self.innerHTML;
+                            num=oresult.innerHTML;
+                            oresult.innerHTML+=self.innerHTML;
+                        }
+                    }else{//按下=
+                        if(count!=null){
+                            num2=oresult.innerHTML.substring(num.length+count.length,oresult.innerHTML.length);
+
+                            if(num2==""){
+                                num2=0;
+                            }
+                            result=countnumber(count,parseFloat(num),parseFloat(num2));
+                            oresult.innerHTML=parseFloat(result);
+                            num=num2=count=null;
+                        }else{
+                            oresult.innerHTML=parseFloat(oresult.innerHTML);
+                        }
+
+                    }
+
+                }
+                function countnumber(str,a,b){
+                    switch(str){
+                        case "+":
+                            return a+b;
+                        case "-":
+                            return a-b;
+                        case "×":
+                            return a*b;
+                        case "÷":
+                            return a/b;
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <header><h1>Calculator</h1></header>
+        <div id="calculator">
+            <div id="result">0</div>
+            <table id="btn">
+                <tr>
+                    <td class="clean" style="font-size: 24px;">DEL</td>
+                    <td class="count">+/-</td>
+                    <td class="count">%</td>
+                    <td class="clean">C</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td class="count">÷</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td class="count">×</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td class="count">-</td>
+                </tr>
+                <tr>
+                    <td>.</td>
+                    <td>0</td>
+                    <td class="equa">=</td>
+                    <td class="count">+</td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+</html>
