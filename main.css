@@ -53,5 +53,6 @@ a:hover{
     color: #5d5959;
     font-size: 22px;
     border-top:2px #d9d9e8 solid;
-    text-align:center;
+    width:200px;
+    margin:auto;
 }
