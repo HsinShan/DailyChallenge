@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="painterstyle.css">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico|Sawarabi+Gothic" rel="stylesheet"> 
+        <title>Painter</title>
+        <script>
+            window.onload=function(){
+                var colordiv=document.getElementById("color");
+                var colorli=colordiv.getElementsByTagName("li");
+                var mycanvas=document.getElementById("myCanvas");
+                var ctx = mycanvas.getContext("2d");
+                ctx.fillStyle="white";
+                var pensizediv= document.getElementById("weight");
+                var convert=document.getElementById("ConvertImage");
+                var save=document.getElementById("save");
+                var photo=document.getElementById("photo");
+                var listc=["black","gray","white","red","green","pink","yellow","orange","purple","blue"];
+                var color="black";
+                var pensize="5px";
+                var penfocus=pensizediv.getElementsByTagName("li")[0];
+                var colorfocus=colordiv.getElementsByTagName("li")[0];
+                colorfocus.innerHTML="v";
+                var drawMode = false;
+
+
+                for(var i=0;i<colorli.length;i++){
+                    colorli[i].index=i;
+                    colorli[i].onclick=function(){
+                        color=listc[this.index];
+                        colorfocus.innerHTML="";
+                        colorfocus=this;
+                        colorfocus.innerHTML="v";
+                        
+                    }
+
+                }
+                pensizediv.onclick=function(ev){
+                    ev=window.event||ev;
+                    var self=ev.target||ev.srcElement;
+
+                    if(self.tagName=="LI"){
+                        penfocus.className="";
+                        penfocus=self;
+                        penfocus.className="active";
+                        pensize=getStyle(self,"width");
+                    }
+                }
+
+                mycanvas.onmousedown=function(e){
+                    e=window.event||e;
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = parseInt(pensize);
+                    ctx.moveTo(e.offsetX,e.offsetY);
+                    drawMode = true;
+
+                    document.onmousemove=function(e){
+                        e=window.event||e;
+                        if (drawMode) {
+
+                            ctx.lineTo(e.offsetX,e.offsetY);
+                            ctx.stroke();
+
+                        }
+                    }
+                    document.onmouseup=function(e){
+                        e=window.event||e;
+                        drawMode = false;
+                    }
+
+
+                }
+
+                convert.onclick=function(){
+                    save.style.display="block";
+                    photo.innerHTML="<img src='"+mycanvas.toDataURL()+"'>";
+                }
+
+
+                function getStyle(obj,att){
+                    return window.getComputedStyle?window.getComputedStyle(obj)[att]:obj.currentStyle[att];
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+        <header><h1>Painter</h1></header>
+        <div id="color">
+            <ul>Color:
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div id="weight">
+            <ul>Size:
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+
+            </ul>
+        </div>
+        <div id="paper">
+            <p>Canvas:</p>
+            <canvas id="myCanvas" width="570" height="400" style="border:1px solid #807878;">
+            </canvas>
+            <p style="text-align: center;"><input type="button" id="ConvertImage" value="Convert to Image" /></p>
+            <div id="save">Image:
+                <div id="photo"></div>
+            </div>
+        </div>
+    </body>
+</html>

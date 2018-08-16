@@ -1,0 +1,145 @@
+body{
+    font-family: 'Sawarabi Gothic', sans-serif;
+}
+header{
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+}
+#color ul{
+    list-style: none;
+    display: flex;
+    height: 50px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+    width: 570px;
+    margin: auto;
+ 
+}
+#color ul li{
+    width: 30px;
+    height: 30px;
+    border: 1px #000 solid;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    line-height: 30px;
+    text-align: center;
+}
+#color ul li:hover{
+    transform: scale(1.2);
+}
+#color ul li:nth-child(1){
+    background-color: black;
+    color: #CCC;
+}
+#color ul li:nth-child(10){
+    background-color: blue;
+}
+#color ul li:nth-child(4){
+    background-color: red;
+}
+#color ul li:nth-child(5){
+    background-color: green;
+}
+#color ul li:nth-child(6){
+    background-color: pink;
+}
+#color ul li:nth-child(7){
+    background-color: yellow;
+}
+#color ul li:nth-child(8){
+    background-color: orange;
+}
+#color ul li:nth-child(9){
+    background-color: purple;
+}
+#color ul li:nth-child(2){
+    background-color:gray;
+}
+#weight{
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+}
+#weight ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    width: 570px;
+    margin: auto;
+}
+#weight ul li{
+    margin: 0 10px;
+    background-color: black;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+#weight ul li:nth-child(1){
+    width: 5px;
+    height: 5px;
+    border-radius: 10px;
+}
+#weight ul li:nth-child(2){
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+#weight ul li:nth-child(3){
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+}
+#weight ul li:nth-child(4){
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+#weight ul li:nth-child(5){
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+}
+#weight ul li:hover{
+    box-shadow: 1px 2px 2px 3px #a8a8a8;
+}
+#weight .active{
+    box-shadow: 1px 2px 2px 3px #a8a8a8;
+}
+canvas{
+    cursor: crosshair;
+}
+#paper{
+    width: 570px;
+    margin: auto;
+}
+#photo{
+    width: 570px;
+    height: 400px;
+    line-height: 30px;
+    border:1px solid #807878;
+    
+}
+#save{
+    display: none;
+}
+#ConvertImage{
+    height: 30px;
+    line-height: 20px;
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 2px #727272 solid;
+    background-color: #cbcbcb;
+    border-radius: 5px;
+    transition: all 0.5s;
+}
+#ConvertImage:hover{
+   background-color: #727272;
+    color: #eee;
+}
+
+
+
+
