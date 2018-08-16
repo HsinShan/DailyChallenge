@@ -49,7 +49,7 @@ a:hover{
     color: #e0b064;
 }
 .project{
-    padding: 50px;
+    padding: 50px 10px;
     color: #5d5959;
     font-size: 22px;
     border-top:2px #d9d9e8 solid;
