@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="bombNumberstyle.css">
+        <script src="move2.js" type="text/javascript"></script>
+        <link href="https://fonts.googleapis.com/css?family=Courgette|Lato" rel="stylesheet"> 
+        <title>BombNumber</title>
+        <script>
+            window.onload=function(){
+                var start=document.getElementById("start");
+                var game=document.getElementById("game");
+                var ranNum=game.getElementsByTagName("h1")[0];
+                var btn=game.getElementsByTagName("input");
+                var audiomusic=document.getElementsByTagName("audio");
+                var tempnum=0;
+                var sound=0;
+                var time=document.getElementsByTagName("i")[0];
+                var score=document.getElementsByTagName("i")[1];
+                var recordscore=0;
+                var timer=null;
+                var second=60;
+                var over=document.getElementById("over");
+                var result=over.getElementsByTagName("h1")[0];
+                var resultli=["Umm... Fighting!!!","Great","Unbelivable!!!"];
+                var rule=document.getElementById("rule");
+                var again=document.getElementById("restart");
+
+                console.log(btn);
+
+                start.onclick=function(){
+                    startmove(rule,"height",0);
+                    startmove(game,"height",480);
+                    starttimer();
+                    RandomNumber();
+
+                }
+                for(var i=0;i<4;i++){
+                    btn[i].onclick=function(){
+                        playSound(this,sound);
+                    }
+                }
+
+                again.onclick=function(){
+                    startmove(over,"height",0);
+                    startmove(rule,"height",480);
+                }
+
+                function playSound(obj,num){
+                    if(obj.className=="btn"+num){
+                        audiomusic[0].play();
+                        RandomNumber();
+                        recordscore+=1;
+                        score.innerHTML=recordscore;
+                    }else{
+                        audiomusic[1].play();
+                    }
+
+                }
+
+                function RandomNumber(){
+                    tempnum=parseInt(Math.random()*1000);//1~999的數字
+                    ranNum.innerHTML=tempnum;//1~999的數字
+
+                    if(tempnum % 3==0 && tempnum % 5==0){
+                        console.log(3);
+                        sound=3;
+                    }else if(tempnum % 3==0){
+                        console.log(1);
+                        sound=1;
+                    }else if(tempnum % 5==0){
+                        console.log(2);
+                        sound=2;
+                    }else{
+                        console.log(4);
+                        sound=4;
+                    }
+                }
+
+                function starttimer(){
+                    if(timer==null){
+                        timer=setInterval(function(){
+                            second--;
+                            if(second<0){
+                                end();
+                                clearInterval(timer);
+                                timer=null;
+                            }else{
+                                time.innerHTML="00:"+format(second);
+                            }
+
+                        },1000)
+                    }
+                }
+                function format(num){
+                    if(num<10){
+                        return "0"+num;
+                    }else{
+                        return num;
+                    }
+                }
+
+                function end(){
+                    startmove(game,"height",0);
+                    startmove(over,"height",480);
+                    game.style.display="none";
+                    if(score<=10){
+                        result.innerHTML=resultli[0];
+                    }else if(score>10&&score<20){
+                        result.innerHTML=resultli[1];
+                    }else{
+                        result.innerHTML=resultli[2];
+                    }
+                }
+
+            }
+        </script>
+    </head>
+    <body>
+        <header><h1>BombNumber</h1></header>
+        <div id="content">
+            <div id="rule">
+                Rule: <br>
+                When the number is divisible by 3, press the yellow button.<br>
+                When the number is divisible by 5, press the red button.<br>
+                When the number is divisible by both 3 and 5, press the green button.<br>
+                When the number isn't divisible by either 3 or 5, press the gray button.
+                <input type="button" id="start" value="start">
+            </div>
+            <div id="game">
+                <p>Time : <i>1:00</i></p>
+                <p>Score : <i>0</i></p>
+                <h1>150</h1>
+
+                <p>
+                    <input type="button" value="3" class="btn1">
+                    <input type="button" value="5" class="btn2">
+                    <input type="button" value="3&5" class="btn3">
+                    <input type="button" value="none" class="btn4">
+                </p>
+                <audio src="335908__littlerainyseasons__correct.mp3" type="audio/mpeg"></audio>
+                <audio src="363920__samsterbirdies__8-bit-error.wav" type="audio/wav"></audio>
+
+            </div>
+            <div id="over">
+                <h1></h1>
+                <p><input type="button" id="restart" value="Again"></p>
+            </div>
+        </div>
+    </body>
+</html>
