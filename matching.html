@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="matchimhstyle.css">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico|Sawarabi+Gothic" rel="stylesheet"> 
+        <title>Matching</title>
+        <script>
+            window.onload=function(){
+                var ocon=document.getElementById("content");
+                var step=ocon.getElementsByTagName("i")[0];
+                var ostep=0;
+                var oscore=0;
+                var score=ocon.getElementsByTagName("i")[1];
+                var game=document.getElementsByTagName("table")[0];
+                var otd=game.getElementsByTagName("td");
+                var shownum=0;
+                var tempphoto,tempphoto2,photonum,tempphotonum=0;
+                var again=document.getElementById("again");
+
+                var pngli=new Array();
+                for(var i=1;i<31;i++){
+                    pngli.push(i);
+                }
+                //打亂list
+                again.onclick=function(){
+                    pngli.sort(function(){
+                        return Math.random()-0.5;
+                    });
+                    ostep=oscore=0;
+                    step.innerHTML=ostep;
+                    score.innerHTML=oscore;
+                    shownum=tempphoto=tempphoto2=photonum=tempphotonum=0;
+                    for(var l=0;l<otd.length;l++){
+                        otd[l].style.backgroundImage="linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%)";
+                    }
+                }
+                for(var j=0;j<otd.length;j++){
+                    otd[j].index=j;
+                    otd[j].onclick=function(){
+                        ostep++;
+                        step.innerHTML=ostep;
+                        shownum++;
+                        if(shownum<3){
+                            if(pngli[this.index]<16){
+                                photonum=pngli[this.index];
+                                this.style.backgroundImage="url(mimage/"+pngli[this.index]+".png)";
+                            }else{
+                                photonum=pngli[this.index]-15;
+                                this.style.backgroundImage="url(mimage/"+(pngli[this.index]-15)+".png)";
+                            }
+
+                            if(shownum==1){
+                                tempphoto=this.index;
+                                tempphotonum=photonum;
+
+                            }else if(shownum==2){
+
+                                tempphoto2=this.index;
+
+                                if(photonum!=tempphotonum){
+                                    setTimeout(function(){
+                                        otd[tempphoto2].style.backgroundImage="linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%)";
+                                        otd[tempphoto].style.backgroundImage="linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%)";
+                                        tempphoto=null;
+                                        tempphotonum=photonum=shownum=0;
+                                    },500);
+                                }else{
+                                    oscore++;
+                                    score.innerHTML=oscore;
+                                    tempphoto=null;
+                                    tempphotonum=photonum=shownum=0;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            }
+        </script>
+    </head>
+    <body>
+        <header><h1>Matching</h1></header>
+        <div id="content"><p>Step:<i>0</i></p><p>Matching:<i>0</i></p>
+
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <p><input type="button" id="again" value="Again"></p>
+        </div>
+    </body>
+</html>

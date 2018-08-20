@@ -1,0 +1,65 @@
+body{
+    background-color: antiquewhite;
+    font-family: 'Sawarabi Gothic', sans-serif;
+}
+header{
+    text-align: center;
+}
+#content{
+    width: 600px;
+    margin: auto;
+}
+#content p:nth-child(1),#content p:nth-child(2){
+    display: inline-block;
+    margin:0 100px;
+    text-align: center;
+
+}
+#content p:nth-child(3){
+    width:600px;
+    text-align: center;
+
+}
+i{
+    font-style: normal;
+    margin-left: 2px;
+}
+table{
+    background: #FFF;
+    width: 600px;
+    height: 500px;
+    margin:10px auto;
+    border-collapse: collapse;
+}
+table td{
+    border: 10px antiquewhite solid;
+    height: 70px;
+    widows: 70px;
+    padding: 0;
+    /*    background-image: url(mimage/1.png);*/
+    background-image: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+}
+
+#again{
+    width: 100px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 26px;
+    text-align: center;
+    margin: 0 250px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    border: none;
+    color: #4e4e4e;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+#again:hover{
+    transform: scale(1.2);
+    background-color: #55be9a;
+    color: #efe9e9;
+}
